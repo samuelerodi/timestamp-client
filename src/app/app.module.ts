@@ -16,10 +16,11 @@ import { ROUTES } from './app.routes';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { NgDragDropModule } from 'ng-drag-drop';
 
+import { AppService } from '../services/app.service';
+
 //UI CUSTOM COMPONENTS
 import { ComponentsModule } from '../components/components.module';
 import { DirectivesModule } from '../directives/directives.module';
-
 
 // App is our top level component
 import { AppComponent } from './app.component';
@@ -27,6 +28,8 @@ import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
+import { TimestampComponent } from './timestamp';
+import { LoadingComponent } from './loading';
 import { ElementsComponent } from './elements';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
@@ -56,8 +59,10 @@ interface StoreType {
   bootstrap: [ AppComponent ],
   declarations: [
     AppComponent,
+    LoadingComponent,
     ElementsComponent,
     AboutComponent,
+    TimestampComponent,
     HomeComponent,
     NoContentComponent,
     XLargeDirective
@@ -74,7 +79,7 @@ interface StoreType {
       useHash: Boolean(history.pushState) === false,
       preloadingStrategy: PreloadAllModules
     }),
-    NgbModule.forRoot(),
+    NgbModule,
     // NgDragDropModule.forRoot(),
     ComponentsModule,
     DirectivesModule,
@@ -91,7 +96,8 @@ interface StoreType {
    */
   providers: [
     environment.ENV_PROVIDERS,
-    APP_PROVIDERS
+    APP_PROVIDERS,
+    AppService
   ]
 })
 export class AppModule {}

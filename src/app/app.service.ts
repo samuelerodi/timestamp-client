@@ -9,6 +9,7 @@ export class AppState {
 
   public _state: InternalStateType = { };
 
+
   /**
    * Already return a clone of the current state.
    */

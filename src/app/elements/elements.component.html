@@ -1,20 +1,46 @@
-<ngb-accordion [closeOthers]="true" activeIds="static-1">
-  <ngb-panel id="static-1" title="Simple">
-    <ng-template ngbPanelContent>
-      1. Check docs at https://ng-bootstrap.github.io/#/components/accordion/examples
-    </ng-template>
-  </ngb-panel>
-  <ngb-panel id="static-2">
-    <ng-template ngbPanelTitle>
-      <span>&#9733; <b>Fancy</b> title &#9733;</span>
-    </ng-template>
-    <ng-template ngbPanelContent>
-      2. Check docs at https://ng-bootstrap.github.io/#/components/accordion/examples
-    </ng-template>
-  </ngb-panel>
-  <ngb-panel id="static-3" title="Disabled" [disabled]="true">
-    <ng-template ngbPanelContent>
-      3. Check docs at https://ng-bootstrap.github.io/#/components/accordion/examples
-    </ng-template>
-  </ngb-panel>
-</ngb-accordion>
+<div>
+ ACCORDION
+  <ngb-accordion [closeOthers]="true" activeIds="static-1">
+    <ngb-panel id="static-1" title="Simple">
+      <ng-template ngbPanelContent>
+        1. Check docs at https://ng-bootstrap.github.io/#/components/accordion/examples
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="static-2">
+      <ng-template ngbPanelTitle>
+        <span>&#9733; <b>Fancy</b> title &#9733;</span>
+      </ng-template>
+      <ng-template ngbPanelContent>
+        2. Check docs at https://ng-bootstrap.github.io/#/components/accordion/examples
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="static-3" title="Disabled" [disabled]="true">
+      <ng-template ngbPanelContent>
+        3. Check docs at https://ng-bootstrap.github.io/#/components/accordion/examples
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+</div>
+
+
+<div>
+  ALERT
+  <ngb-alert [dismissible]="false">
+    <strong>Warning!</strong> Better check yourself, https://ng-bootstrap.github.io/#/components/alert/examples
+  </ngb-alert>
+</div>
+
+<div class="btn-group btn-group-toggle">
+  CHECKBOX
+  <label class="btn-primary" ngbButtonLabel>
+    <input type="checkbox" ngbButton [(ngModel)]="model.left"> Left (pre-checked)
+  </label>
+  <label class="btn-primary" ngbButtonLabel>
+    <input type="checkbox" ngbButton [(ngModel)]="model.middle"> Middle
+  </label>
+  <label class="btn-primary" ngbButtonLabel>
+    <input type="checkbox" ngbButton [(ngModel)]="model.right"> Right
+  </label>
+</div>
+<hr>
+<pre>{{model | json}}</pre>

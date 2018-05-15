@@ -1,4 +1,4 @@
-<nav>
+<nav *ngIf="navbar.visible">
   <a [routerLink]=" ['./'] "
     routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
     Index
@@ -7,17 +7,29 @@
     routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
     Home
   </a>
-  <a [routerLink]=" ['./detail'] "
+  <!-- <a [routerLink]=" ['./detail'] "
     routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
     Detail
   </a>
   <a [routerLink]=" ['./barrel'] "
     routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
     Barrel
-  </a>
+  </a> -->
   <a [routerLink]=" ['./about'] "
     routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
     About
+  </a>
+  <a [routerLink]=" ['./elements'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    Elements
+  </a>
+  <a [routerLink]=" ['./timestamp'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    Timestamp
+  </a>
+  <a [routerLink]=" ['./loading'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    Loading
   </a>
   <a *ngIf="showDevModule" [routerLink]=" ['./dev-module'] "
      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
@@ -25,6 +37,7 @@
   </a>
 </nav>
 
+<!--
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,4 +72,4 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
-</nav>
+</nav> -->

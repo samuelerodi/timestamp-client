@@ -11,5 +11,6 @@ export class ElementsComponent implements OnInit {
   constructor( public route: ActivatedRoute ) {}
 
   public ngOnInit() { }
+  public model={};
 
 }
