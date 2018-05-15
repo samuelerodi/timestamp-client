@@ -4,13 +4,13 @@ import { Router, NavigationStart } from '@angular/router';
 
 @Injectable()
 export class AppService {
-  public navbar:any={
+  public navbar:any= {
     visible : true,
     hide() { this.visible = false; },
     show() { this.visible = true; },
     toggle() { this.visible = !this.visible; }
   };
-  public footer:any={
+  public footer:any= {
     visible : true,
     hide() { this.visible = false; },
     show() { this.visible = true; },
@@ -24,19 +24,18 @@ export class AppService {
     this.footer.hide()
     this.navbar.hide()
   }
-
+  public reload() {
+    this.footer.show()
+    this.navbar.show()
+  }
   constructor(private router: Router) {
-
-  }
-  ngOnInit() {
-    // our code is in here
-    this.router.events
-    .subscribe((event) => {
-      if (event instanceof NavigationStart) this.showComponents();
+    router.events
+    .subscribe((event) =>{
+      if (event instanceof NavigationStart) this.reload();
       // example: NavigationStart, RoutesRecognized, NavigationEnd
-      console.log("changed event")
-
     });
-  }
+   }
+   
+  ngOnInit() { }
 
 }
