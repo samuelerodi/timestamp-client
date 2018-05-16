@@ -14,6 +14,5 @@ export const ROUTES: Routes = [
   { path: 'timestamp',  component: TimestampComponent },
   { path: 'elements', component: ElementsComponent },
   { path: 'detail', loadChildren: './+detail#DetailModule'},
-  { path: 'barrel', loadChildren: './+barrel#BarrelModule'},
   { path: '**',    component: NoContentComponent },
 ];

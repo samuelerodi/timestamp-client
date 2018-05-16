@@ -4,7 +4,7 @@ import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'loading',
-  styleUrls: [ './loading.component.css' ],
+  styleUrls: [ './loading.component.scss' ],
   templateUrl: './loading.component.html',
   providers:[]
 })
