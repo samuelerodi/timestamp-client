@@ -1,41 +1,28 @@
 import { Injectable } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
+import { ComponentsService } from './components.service'
 
+export interface InternalStateType {
+  [key: string]: any;
+}
 
 @Injectable()
 export class AppService {
-  public navbar:any= {
-    visible : true,
-    hide() { this.visible = false; },
-    show() { this.visible = true; },
-    toggle() { this.visible = !this.visible; }
-  };
-  public footer:any= {
-    visible : true,
-    hide() { this.visible = false; },
-    show() { this.visible = true; },
-    toggle() {this.visible = !this.visible; }
-  };
-  public showComponents(){
-    this.footer.show()
-    this.navbar.show()
-  }
-  public hideComponents(){
-    this.footer.hide()
-    this.navbar.hide()
-  }
-  public reload() {
-    this.footer.show()
-    this.navbar.show()
-  }
-  constructor(private router: Router) {
+
+  //HANDLE INTERNAL APP STATE + GETTER AND SETTERS
+  public _state: InternalStateType = { };
+  public get state() { return JSON.parse(JSON.stringify(this._state));}
+  public set state(value) { throw new Error('do not mutate the `.state` directly');}
+  public get(prop?: any) { return prop ? this._state[prop] : this._state;}
+  public set(prop: string, value: any) { return this._state[prop] = value;}
+
+  constructor(private router: Router, private components: ComponentsService) {
     router.events
     .subscribe((event) =>{
-      if (event instanceof NavigationStart) this.reload();
+      if (event instanceof NavigationStart) components.reload();
       // example: NavigationStart, RoutesRecognized, NavigationEnd
     });
    }
-   
-  ngOnInit() { }
-
+ ngOnInit() {
+ }
 }

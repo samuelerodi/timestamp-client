@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppService } from '../../services/app.service';
+import { ComponentsService } from '../../services/components.service';
 
 @Component({
   selector: "app-navbar",
@@ -8,7 +8,7 @@ import { AppService } from '../../services/app.service';
 })
 export class NavbarComponent{
   public navbar:any;
-  constructor(public app: AppService) {
-    this.navbar = app.navbar;
+  constructor(public components: ComponentsService) {
+    this.navbar = components.navbar;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AppService } from '../../services/app.service';
-import { AppState } from '../app.service';
+import { ComponentsService } from '../../services/components.service';
+
 
 @Component({
   selector: 'timestamp',
@@ -9,13 +9,13 @@ import { AppState } from '../app.service';
   templateUrl: './timestamp.component.html',
   providers:[]
 })
-export class TimestampComponent implements OnInit {
+export class TimestampComponent {
 
-  constructor( public route: ActivatedRoute, public app: AppService, public appState: AppState) {
-  }
-
-  public ngOnInit() {
-    this.app.hideComponents();
+  constructor( public route: ActivatedRoute, public components: ComponentsService) {
+      components.apply({
+       navbar: {visible : false},
+       footer: {visible : false}
+      });
   }
 
 }

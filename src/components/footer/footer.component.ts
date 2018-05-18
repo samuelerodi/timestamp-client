@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppService } from '../../services/app.service';
+import { ComponentsService } from '../../services/components.service';
 
 @Component({
   selector: "app-footer",
@@ -8,7 +8,7 @@ import { AppService } from '../../services/app.service';
 })
 export class FooterComponent{
   public footer:any;
-  constructor(public app: AppService) {
-    this.footer = app.footer;
+  constructor(public components: ComponentsService) {
+    this.footer = components.footer;
   }
 }

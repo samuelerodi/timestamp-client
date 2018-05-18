@@ -1,10 +1,5 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
+import {  Component,  OnInit} from '@angular/core';
 
-import { AppState } from '../app.service';
-import { Title } from './title';
 import { XLargeDirective } from './x-large';
 
 @Component({
@@ -14,15 +9,6 @@ import { XLargeDirective } from './x-large';
    * where, in this case, selector is the string 'home'.
    */
   selector: 'home',  // <home></home>
-  /**
-   * We need to tell Angular's Dependency Injection which providers are in our app.
-   */
-  providers: [
-    Title
-  ],
-  /**
-   * Our list of styles in our component. We may add more to compose many styles together.
-   */
   styleUrls: [ './home.component.css' ],
   /**
    * Every Angular template is first compiled by the browser before Angular runs it's compiler.
@@ -37,19 +23,11 @@ export class HomeComponent implements OnInit {
   /**
    * TypeScript public modifiers
    */
-  constructor(
-    public appState: AppState,
-    public title: Title
-  ) {}
+  constructor() {}
 
-  public ngOnInit() {
-    /**
-     * this.title.getData().subscribe(data => this.data = data);
-     */
-  }
+  public ngOnInit() {  }
 
   public submitState(value: string) {
-    this.appState.set('value', value);
     this.localState.value = '';
   }
 }

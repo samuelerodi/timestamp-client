@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AppService } from '../../services/app.service';
+import { ComponentsService } from '../../services/components.service';
 
 @Component({
   selector: 'loading',
@@ -8,11 +8,11 @@ import { AppService } from '../../services/app.service';
   templateUrl: './loading.component.html',
   providers:[]
 })
-export class LoadingComponent implements OnInit {
-  constructor(public route: ActivatedRoute, public app: AppService) {
-
-  }
-  public ngOnInit() {
-    this.app.hideComponents();
+export class LoadingComponent{
+  constructor(public route: ActivatedRoute, public components: ComponentsService) {
+    components.apply({
+      navbar:{visible:false},
+      footer:{visible:false}
+    });
   }
 }

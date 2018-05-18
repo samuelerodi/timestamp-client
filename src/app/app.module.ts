@@ -16,7 +16,8 @@ import { ROUTES } from './app.routes';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { NgDragDropModule } from 'ng-drag-drop';
 
-import { AppService } from '../services/app.service';
+import { AppService, InternalStateType } from '../services/app.service';
+import { ComponentsService } from '../services/components.service';
 
 //UI CUSTOM COMPONENTS
 import { ComponentsModule } from '../components/components.module';
@@ -25,7 +26,6 @@ import { DirectivesModule } from '../directives/directives.module';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
-import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { TimestampComponent } from './timestamp';
@@ -42,8 +42,7 @@ import '../styles/headings.css';
 
 // Application wide providers
 const APP_PROVIDERS = [
-  ...APP_RESOLVER_PROVIDERS,
-  AppState
+  ...APP_RESOLVER_PROVIDERS
 ];
 
 interface StoreType {
@@ -97,7 +96,8 @@ interface StoreType {
   providers: [
     environment.ENV_PROVIDERS,
     APP_PROVIDERS,
-    AppService
+    AppService,
+    ComponentsService
   ]
 })
 export class AppModule {}

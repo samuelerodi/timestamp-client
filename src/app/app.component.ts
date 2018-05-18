@@ -3,7 +3,7 @@
  */
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { environment } from 'environments/environment';
-import { AppState } from './app.service';
+import { AppService } from '../services/app.service'
 
 /**
  * App Component
@@ -24,13 +24,9 @@ export class AppComponent implements OnInit {
   public url = 'https://tipe.io';
   public showDevModule: boolean = environment.showDevModule;
 
-  constructor(
-    public appState: AppState
-  ) {}
+  constructor(public app:AppService) {}
 
-  public ngOnInit() {
-    console.log('Initial App State', this.appState.state);
-  }
+  public ngOnInit() {  }
 
 }
 
