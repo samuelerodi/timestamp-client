@@ -1,3 +1,4 @@
+//PLATFORM
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
@@ -5,25 +6,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-/*
- * Platform and Environment providers/directives/pipes
- */
+//ENVIRONMENT AND ROUTING
 import { environment } from 'environments/environment';
 import { ROUTES } from './app.routes';
 
 
 //UI COMPONENTS
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { NgDragDropModule } from 'ng-drag-drop';
+import { NgDragDropModule } from 'ng-drag-drop';
 
+//STYLES
+import '../styles/styles.scss';
+import '../styles/headings.css';
+
+//CUSTOM SERVICES
 import { AppService, InternalStateType } from '../services/app.service';
 import { ComponentsService } from '../services/components.service';
 
-//UI CUSTOM COMPONENTS
+//CUSTOM UI COMPONENTS
 import { ComponentsModule } from '../components/components.module';
 import { DirectivesModule } from '../directives/directives.module';
 
-// App is our top level component
+//PAGES
 import { AppComponent } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { HomeComponent } from './home';
@@ -36,9 +40,6 @@ import { XLargeDirective } from './home/x-large';
 import { DevModuleModule } from './+dev-module';
 
 
-
-import '../styles/styles.scss';
-import '../styles/headings.css';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -63,8 +64,7 @@ interface StoreType {
     AboutComponent,
     TimestampComponent,
     HomeComponent,
-    NoContentComponent,
-    XLargeDirective
+    NoContentComponent
   ],
   /**
    * Import Angular's modules.
@@ -79,7 +79,7 @@ interface StoreType {
       preloadingStrategy: PreloadAllModules
     }),
     NgbModule,
-    // NgDragDropModule.forRoot(),
+    NgDragDropModule.forRoot(),
     ComponentsModule,
     DirectivesModule,
 

@@ -2,6 +2,9 @@
 /* This file is for setting global styles  */
 @import 'variables';
 @import 'custom';
+@import 'fontawesome/scss/fontawesome.scss';
+@import 'fontawesome/scss/fa-solid.scss';
+@import '~ng-drag-drop/style.css';
 @import '~bootstrap/scss/bootstrap.scss';
 nav {
   margin-top: 16px;

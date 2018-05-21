@@ -1,19 +1,13 @@
 import { NgModule } from '@angular/core';
 import { ModuleWithProviders } from '@angular/core';
-import { Draggable } from './draggable/draggable.directive';
-import { Droppable } from './droppable/droppable.directive';
-import { NgDragDropService } from './shared/ng-drag-drop.service';
+import { FileDropDirective } from './filedrop.directive';
+import { FileSelectDirective } from './fileselect.directive';
+
 
 @NgModule({
-  imports: [],
-  declarations: [],
-  exports: [ ]
+  declarations: [ FileDropDirective, FileSelectDirective ],
+  imports:[],
+  providers: [],
+  exports:[FileDropDirective, FileSelectDirective ]
 })
-export class DirectivesModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: DirectivesModule,
-      providers: [NgDragDropService]
-    };
-  }
-}
+export class DirectivesModule {}

@@ -1,11 +1,36 @@
+<style>
 
+</style>
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h2 draggable>Timestamp your future...</h2>
+      <h2 >Timestamp your future...</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <ngb-alert [dismissible]="true" *ngFor="let warning of warnings" (close)="warnings=[]">
+        <strong>{{warning}} </strong>
+      </ngb-alert>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
       <div class="card">
-        <div class="card-body" droppable>Drop me here </div>
+         <div ng2FileDrop
+             [ngClass]="{'drop-zone-over': fileOver}"
+             (fileOver)="onFileOver($event)"
+             (onFileDrop)="onFileDrop($event)"
+             class="drop-zone">
+             <i class="fas fa-sign-in-alt fa-rotate-90 fa-7x"></i>
+            <div *ngIf="!file">Base drop zone or choose file</div>
+            <div *ngIf="file">{{file.name}}</div>
+            <input type="file" ng2FileSelect (onFileSelected)="onFileDrop($event)"/>
+          </div>
       </div>
+      <div class="box__uploading">Uploading&hellip;</div>
+      <div class="box__success">Done! </div>
+      <div class="box__error">Error! </div>
     </div>
   </div>
 </div>
