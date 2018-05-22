@@ -23,6 +23,5 @@ export class AppService {
       // example: NavigationStart, RoutesRecognized, NavigationEnd
     });
    }
- ngOnInit() {
- }
+ ngOnInit() {}
 }

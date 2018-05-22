@@ -1,12 +1,12 @@
-<style>
-
-</style>
 <div class="container">
   <div class="row">
     <div class="col-12">
       <h2 >Timestamp your future...</h2>
     </div>
   </div>
+</div>
+<div class="spacing"></div>
+<div class="container">
   <div class="row">
     <div class="col-12">
       <ngb-alert [dismissible]="true" *ngFor="let warning of warnings" (close)="warnings=[]">
@@ -14,23 +14,55 @@
       </ngb-alert>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-         <div ng2FileDrop
-             [ngClass]="{'drop-zone-over': fileOver}"
-             (fileOver)="onFileOver($event)"
-             (onFileDrop)="onFileDrop($event)"
-             class="drop-zone">
-             <i class="fas fa-sign-in-alt fa-rotate-90 fa-7x"></i>
-            <div *ngIf="!file">Base drop zone or choose file</div>
-            <div *ngIf="file">{{file.name}}</div>
-            <input type="file" ng2FileSelect (onFileSelected)="onFileDrop($event)"/>
-          </div>
+</div>
+<div class="spacing"></div>
+<div class="container">
+  <div class="col-12">
+    <div class="card text-center">
+      <div class="card-header">
+        Drop your file here
       </div>
-      <div class="box__uploading">Uploading&hellip;</div>
-      <div class="box__success">Done! </div>
-      <div class="box__error">Error! </div>
+      <div class="drop-zone"
+          ng2FileDrop
+          (fileOver)="onFileOver($event)"
+          (onFileDrop)="onFileDrop($event)">
+          <div class="card-body">
+          <h5 class="card-title"><i class="fas fa-sign-in-alt fa-rotate-90 fa-5x"></i></h5>
+          <p class="card-text">Stamp or check if your file has been timestamped already</p>
+          <div *ngIf="file">spinner</div>
+          <input class="btn btn-primary" type="file" ng2FileSelect (onFileSelected)="onFileDrop($event)"/>
+        </div>
+      </div>
     </div>
+  </div>
+</div>
+<div class="spacing"></div>
+<div class="container">
+  <div class="col-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-success">
+        <div class="d-flex w-100 justify-content-between">
+          <div>
+            <h5 class="mb-1">List group item heading</h5>
+            <small>Donec id elit non mi porta.</small>
+          </div>
+          <small>3 days ago</small>
+          <button type="button" class="btn btn-primary">STAMP</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="spacing"></div>
+<div class="container">
+  <div class="col-12">
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td>Mark</td>
+          <td>Otto</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

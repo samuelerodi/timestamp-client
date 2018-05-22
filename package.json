@@ -100,6 +100,7 @@
     "@types/lodash": "^4.14.108",
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.5",
+    "crypto-js": "^3.1.9-1",
     "http-server": "^0.11.1",
     "ie-shim": "^0.1.0",
     "lodash": "^4.17.10",

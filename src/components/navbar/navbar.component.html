@@ -1,75 +1,19 @@
-<nav *ngIf="navbar.visible">
-  <a [routerLink]=" ['./'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    Index
-  </a>
-  <a [routerLink]=" ['./home'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    Home
-  </a>
-  <!-- <a [routerLink]=" ['./detail'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    Detail
-  </a>
-  <a [routerLink]=" ['./barrel'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    Barrel
-  </a> -->
-  <a [routerLink]=" ['./about'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    About
-  </a>
-  <a [routerLink]=" ['./elements'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    Elements
-  </a>
-  <a [routerLink]=" ['./timestamp'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    Timestamp
-  </a>
-  <a [routerLink]=" ['./loading'] "
-    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    Loading
-  </a>
-  <a *ngIf="showDevModule" [routerLink]=" ['./dev-module'] "
-     routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
-    DevModule
-  </a>
-</nav>
-
-<!--
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-toggleable-lg navbar-light bg-faded" *ngIf="navbar.visible">
+  <button class="navbar-toggler navbar-toggler-right" type="button" (click)="navbar.collapsed = !navbar.collapsed" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+  <a class="navbar-brand" href="#">Title</a>
+  <div class="collapse navbar-collapse" [ngbCollapse]="navbar.collapsed">
+    <ul class="navbar-nav">
+      <li class="nav-item" [ngClass]="{active:item.active}"  *ngFor="let item of navbar.leftTabs">
+        <a class="nav-link" [ngClass]="{disabled:item.disabled}" [routerLink]="[item.target]" *ngIf="item.target && !item.dropdown"><span>{{item.name}}</span></a>
+        <div class="btn btn-block" ngbDropdown *ngIf="item.dropdown && !item.target" [id]="'navbar-dropdown-'+item.name" style="padding:0px">
+          <a class="nav-link" ngbDropdownToggle ><span >{{item.name}}</span></a>
+          <div ngbDropdownMenu [attr.aria-labelledby]="'navbar-dropdown-'+item.name" *ngIf="item.dropdown && !item.target">
+            <a class="nav-link dropdown-item" [ngClass]="{disabled:ditem.disabled}" [routerLink]="[item.target]" *ngFor="let ditem of item.dropdown"><span>{{ditem.name}}</span></a>
+          </div>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
-</nav> -->
+</nav>
