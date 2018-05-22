@@ -21,12 +21,12 @@ export class TimestampComponent {
        footer: {visible : false}
       });
   }
-  //
+  public loading:boolean=false;
   public file$: File;
   public warnings:string[]=[];
-  //
+
   public onFileDrop(files: FileList) {
-    var f =this.meetFileRequirements(files);
+    var f = this.meetFileRequirements(files);
     if (!f) return;
     this.file$ = this.createFileBase(f);
     console.log('File Uploaded: ', this.file$);
@@ -34,13 +34,16 @@ export class TimestampComponent {
   }
 
   public meetFileRequirements(files: FileList){
-    //   this.warnings=[];
-    //   this.files = event.files;
-    //   if (this.files.length>1) this.warnings.push('Max one file at a time allowed.');
-    //   if (!this.files[0].fileEntry.isFile) {
-    //     this.warnings.push('Only system files allowed.');
-    //     return;
-    //   }
+      this.warnings=[];
+      if (files.length>1) {
+        this.warnings.push('Max one file at a time allowed.');
+        return;
+      }
+      // var f = files[0].fileEntry as FileSystemFileEntry;
+      // if (!files[0].fileEntry.isFile) {
+      //   this.warnings.push('Only system files allowed.');
+      //   return;
+      // }
     //   const fileEntry = this.files[0].fileEntry as FileSystemFileEntry;
     //   fileEntry.file((file: File) => {
     //     this.file=file;
@@ -60,9 +63,10 @@ export class TimestampComponent {
   public verifyFile(f:any){
     return this.http
     .get(API_PROOF, {params: {"hash":f.hash}})
-    .subscribe(data => _.merge(f, data),
-    (e: HttpErrorResponse) => {
-      if (e.status==404) _.merge(f, {committed: false, status:'NOT STAMPED'})
+    .subscribe(
+      (data) => _.merge(f, data),
+      (e: HttpErrorResponse) => {
+      if (e.status==404) _.merge(f, {committed: false, status:'NOT STAMPED'});
     });
   }
   public stampFile(f:any){
