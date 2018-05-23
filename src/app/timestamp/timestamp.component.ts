@@ -21,16 +21,18 @@ export class TimestampComponent {
        footer: {visible : false}
       });
   }
-  public loading:boolean=false;
+  public verifying:Observable<any>;
+  public stamping:Observable<any>;
   public file$: File;
   public warnings:string[]=[];
 
   public onFileDrop(files: FileList) {
     var f = this.meetFileRequirements(files);
     if (!f) return;
-    this.file$ = this.createFileBase(f);
-    console.log('File Uploaded: ', this.file$);
-    this.verifyFile(this.file$);
+    this.verifying=this.createFileBase(f).subscribe((r)=>{
+      this.file$=r;
+      return Observable.of(this.verifyFile(this.file$));
+    });
   }
 
   public meetFileRequirements(files: FileList){
@@ -44,36 +46,36 @@ export class TimestampComponent {
       //   this.warnings.push('Only system files allowed.');
       //   return;
       // }
-    //   const fileEntry = this.files[0].fileEntry as FileSystemFileEntry;
-    //   fileEntry.file((file: File) => {
-    //     this.file=file;
-    //     // Here you can access the real file
-    //     console.log("The file contains:", file);
-    //
-    //   });
     //   // It was a directory (empty directories are added, otherwise only files)
     //   // const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
     //   // console.log(droppedFile.relativePath, fileEntry);
     return files[0];
   }
-  public createFileBase(f:any){
-    f.hash = CryptoJS.SHA256(f.name).toString(CryptoJS.enc.Hex);
-    return f;
+  public createFileBase(f:File){
+    return Observable.create(function (observer) {
+      let fileReader = new FileReader();
+      fileReader.onload = (e) => {
+        let d:any = f;
+        d.hash = CryptoJS.SHA256(fileReader.result).toString(CryptoJS.enc.Hex);
+        observer.next(d);
+        observer.complete();
+      }
+      fileReader.readAsBinaryString(f);
+    });
   }
   public verifyFile(f:any){
     return this.http
     .get(API_PROOF, {params: {"hash":f.hash}})
     .subscribe(
-      (data) => _.merge(f, data),
+      (data) => {_.merge(f, data);},
       (e: HttpErrorResponse) => {
       if (e.status==404) _.merge(f, {committed: false, status:'NOT STAMPED'});
     });
   }
   public stampFile(f:any){
-    return this.http
-    .post(API_PROOF, {"hash":f.hash})
-    .subscribe(data => _.merge(f, data));
-
+    this.stamping = this.http
+      .post(API_PROOF, {"hash":f.hash});
+    return this.stamping.subscribe(data => _.merge(f, data));
   }
   public onFileOver(e:any){}
   public onFileLeave(event){}

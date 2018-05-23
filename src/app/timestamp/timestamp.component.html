@@ -26,10 +26,10 @@
           ng2FileDrop
           (fileOver)="onFileOver($event)"
           (onFileDrop)="onFileDrop($event)">
-          <div class="card-body">
+          <div class="card-body" ng2loading [observe]="verifying">
           <h5 class="card-title"><i class="fas fa-sign-in-alt fa-rotate-90 fa-5x"></i></h5>
           <p class="card-text">Stamp or check if your file has been timestamped already</p>
-          <div *ngIf="file">spinner</div>
+          <!-- <div *ngIf="verifying">spinner</div> -->
           <input class="btn btn-primary" type="file" ng2FileSelect (onFileSelected)="onFileDrop($event)"/>
         </div>
       </div>
