@@ -1,7 +1,7 @@
-import { Directive, EventEmitter, ElementRef, HostListener, HostBinding, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, Renderer2, ComponentRef, ElementRef, HostListener, HostBinding, Input, Output } from '@angular/core';
 
-const fileOverClass = 'drop-zone-over';
-const fileDroppedClass = 'drop-zone-drop';
+const FILE_OVER_CLASS = 'drop-zone-over';
+const FILE_DROPPED_CLASS = 'drop-zone-drop';
 
 @Directive({
   selector: '[ng2FileDrop]'
@@ -13,10 +13,21 @@ export class FileDropDirective {
   @Output() public onFileDrop: EventEmitter<File[]> = new EventEmitter<File[]>();
   protected _class: string[] = [];
 
-  @HostBinding('class')
-  get elementClass(): string {
-      return this._class.join(' ');
+
+  constructor(private renderer: Renderer2, private elementRef: ElementRef) {  }
+
+  addClass(className: string) {
+     this.renderer.addClass(this.elementRef.nativeElement, className);
   }
+  removeClass(className: string) {
+     this.renderer.removeClass(this.elementRef.nativeElement, className);
+  }
+
+
+  // @HostBinding('class')
+  // get elementClass(): string {
+  //     return this._class.join(' ');
+  // }
 
   @HostListener('dragleave', ['$event']) public dragLeave(evt){
     this._preventAndStop(evt);
@@ -27,7 +38,7 @@ export class FileDropDirective {
     }
     let transfer = this._getTransfer(evt);
     this.fileOver.emit(false);
-    if (this._class.indexOf(fileOverClass)!= -1) this._class.splice(this._class.indexOf(fileOverClass), 1);
+    if (this._class.indexOf(FILE_OVER_CLASS)!= -1) this._class.splice(this._class.indexOf(FILE_OVER_CLASS), 1);
     this.onDragLeave.emit(transfer.files);
   }
   @HostListener('dragover', ['$event']) dragOver(evt){
@@ -37,8 +48,8 @@ export class FileDropDirective {
       return;
     }
     transfer.dropEffect = 'copy';
-    if (this._class.indexOf(fileDroppedClass)!= -1) this._class.splice(this._class.indexOf(fileDroppedClass), 1);
-    if (this._class.indexOf(fileOverClass)== -1) this._class.push(fileOverClass);
+    this.removeClass(FILE_DROPPED_CLASS);
+    this.addClass(FILE_OVER_CLASS);
     this.fileOver.emit(true);
     this.onDragOver.emit(transfer.files);
   }
@@ -49,11 +60,11 @@ export class FileDropDirective {
       return;
     }
     this.fileOver.emit(false);
-    if (this._class.indexOf(fileOverClass)!= -1) this._class.splice(this._class.indexOf(fileOverClass), 1);
-    if (this._class.indexOf(fileOverClass)== -1) this._class.push(fileDroppedClass);
+    this.removeClass(FILE_OVER_CLASS);
+    this.addClass(FILE_DROPPED_CLASS);
     this.onFileDrop.emit(transfer.files);
   }
-  constructor() {  }
+
 
   protected _getTransfer(event: any): any {
     return event.dataTransfer ? event.dataTransfer : event.originalEvent.dataTransfer; // jQuery fix;

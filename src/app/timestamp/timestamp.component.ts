@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from "rxjs/Observable";
+import { Observable, Subject } from 'rxjs/Rx'
 import { ComponentsService } from '../../services/components.service';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import * as _ from 'lodash';
@@ -21,18 +21,18 @@ export class TimestampComponent {
        footer: {visible : false}
       });
   }
-  public verifying:Observable<any>;
-  public stamping:Observable<any>;
+  public verifying$:Observable<any>;
+  public stamping$:Observable<any>;
+  public generating$:Observable<any>;
   public file$: File;
   public warnings:string[]=[];
 
   public onFileDrop(files: FileList) {
     var f = this.meetFileRequirements(files);
     if (!f) return;
-    this.verifying=this.createFileBase(f).subscribe((r)=>{
-      this.file$=r;
-      return Observable.of(this.verifyFile(this.file$));
-    });
+    this.generateFile(f)
+    .flatMap((r)=>this.verifyFile(r))
+    .subscribe();
   }
 
   public meetFileRequirements(files: FileList){
@@ -51,31 +51,29 @@ export class TimestampComponent {
     //   // console.log(droppedFile.relativePath, fileEntry);
     return files[0];
   }
-  public createFileBase(f:File){
-    return Observable.create(function (observer) {
+  public generateFile(f:File):Observable<any>{
+    return this.generating$ = Observable.create((observer)=>{
       let fileReader = new FileReader();
       fileReader.onload = (e) => {
-        let d:any = f;
-        d.hash = CryptoJS.SHA256(fileReader.result).toString(CryptoJS.enc.Hex);
-        observer.next(d);
+        this.file$ = <any>f;
+        this.file$.hash = CryptoJS.SHA256(fileReader.result).toString(CryptoJS.enc.Hex);
+        observer.next(this.file$);
         observer.complete();
       }
       fileReader.readAsBinaryString(f);
     });
   }
-  public verifyFile(f:any){
-    return this.http
-    .get(API_PROOF, {params: {"hash":f.hash}})
-    .subscribe(
-      (data) => {_.merge(f, data);},
-      (e: HttpErrorResponse) => {
-      if (e.status==404) _.merge(f, {committed: false, status:'NOT STAMPED'});
-    });
+  public verifyFile(f:any):Observable<any>{
+    return this.verifying$ = this.http
+      .get(API_PROOF, {params: {"hash":f.hash}})
+      .map(data => _.merge(f, data))
+      // .catch((e) => {return _.merge(f, {committed: false, status:'NOT STAMPED'});});
+
   }
-  public stampFile(f:any){
-    this.stamping = this.http
-      .post(API_PROOF, {"hash":f.hash});
-    return this.stamping.subscribe(data => _.merge(f, data));
+  public stampFile(f:any):Observable<any>{
+    return this.stamping$ = this.http
+      .post(API_PROOF, {"hash":f.hash})
+      .map(data => _.merge(f, data));
   }
   public onFileOver(e:any){}
   public onFileLeave(event){}
