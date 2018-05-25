@@ -1,3 +1,22 @@
 .drop-zone { border: dotted 3px lightgray; }
 .drop-zone-over { border: dotted 3px $color-loader; }
 .spacing{margin:20px;}
+.fa-disabled {opacity: 0.6;cursor: not-allowed;}
+.break-line{
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp: 1;
+  word-break: break-word;
+}
+.break-multi-line{
+  overflow:hidden;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp: 3;
+  word-break: break-word;
+}
+
+.footer {
+    background-color: $color-footer;
+}

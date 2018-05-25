@@ -8,8 +8,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DevModuleComponent implements OnInit {
 
-  public ngOnInit() {
-    console.log('hello `DevModule` component');
-  }
+  public ngOnInit() {}
 
 }

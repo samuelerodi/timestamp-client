@@ -17,14 +17,13 @@ export class TimestampComponent {
 
   constructor(public components: ComponentsService, private http:HttpClient) {
       components.apply({
-       navbar: {visible : false},
-       footer: {visible : false}
+       navbar: {visible : false}
       });
   }
-  public verifying$:Observable<any>;
-  public stamping$:Observable<any>;
-  public generating$:Observable<any>;
-  public file$: File;
+  public verifying$:Observable<any>=Observable.of(true);
+  public stamping$:Observable<any>=Observable.of(true);
+  public generating$:Observable<any>=Observable.of(true);
+  public file$: any;
   public warnings:string[]=[];
 
   public onFileDrop(files: FileList) {
@@ -32,7 +31,7 @@ export class TimestampComponent {
     if (!f) return;
     this.generateFile(f)
     .flatMap((r)=>this.verifyFile(r))
-    .subscribe();
+    .subscribe(()=>console.log(this.file$));
   }
 
   public meetFileRequirements(files: FileList){
@@ -61,19 +60,23 @@ export class TimestampComponent {
         observer.complete();
       }
       fileReader.readAsBinaryString(f);
-    });
+    }).share();
   }
   public verifyFile(f:any):Observable<any>{
     return this.verifying$ = this.http
       .get(API_PROOF, {params: {"hash":f.hash}})
+      .share()
       .map(data => _.merge(f, data))
-      // .catch((e) => {return _.merge(f, {committed: false, status:'NOT STAMPED'});});
-
   }
   public stampFile(f:any):Observable<any>{
+    if (!f.hash) return;
     return this.stamping$ = this.http
       .post(API_PROOF, {"hash":f.hash})
+      .share()
       .map(data => _.merge(f, data));
+  }
+  public downloadOts(f:any){
+
   }
   public onFileOver(e:any){}
   public onFileLeave(event){}

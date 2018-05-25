@@ -1,4 +1,9 @@
-<footer *ngIf="footer.visible">
-
-  <span>Angular Starter Kit by @samfisherman</span>
+<footer class="footer" *ngIf="footer.visible" [ngClass]="{fixed-bottom: footer.fixed}">
+  <div class="container">
+      <div>Beware</div>
+      <small>
+        We do not deal with any of your personal data inside the timestamped file, since file content is sent
+        to the calendar server using an hashed and occulted format. Your file never leave your laptop!
+      </small>
+  </div>
 </footer>
