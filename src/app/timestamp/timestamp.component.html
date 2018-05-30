@@ -1,22 +1,23 @@
 <div class="container">
   <div class="spacing row">
     <div class="col-12">
-      <h1>Stampify</h1>
-    </div>
-  </div>
-  <div class="spacing row">
-      <div class="col-12">
-        <ngb-alert [dismissible]="true" *ngFor="let warning of warnings" (close)="warnings=[]">
-          <strong>{{warning}} </strong>
-        </ngb-alert>
+      <div class="jumbotron">
+        <h1 class="display-4">Stampify</h1>
+        <p class="lead">Stamp the world around you with a simple drag and drop</p>
+        <hr>
+        <p>A simple trustless stamping tool based on blockchain.</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="about" role="button">Learn more</a>
+        </p>
       </div>
+    </div>
   </div>
 
   <div class="spacing row">
     <div class="col-12">
       <div class="card text-center">
         <div class="card-header">
-          Drop your file here
+          Start dropping here
         </div>
         <div *ngIf="(verifying$ | async) && (generating$ | async); then dropMe; else loadMe"></div>
           <ng-template #dropMe>
@@ -25,19 +26,19 @@
                   (fileOver)="onFileOver($event)"
                   (onFileDrop)="onFileDrop($event)">
               <div class="card-body">
-                <h5 class="card-title spacing"><i class="fas fa-sign-in-alt fa-rotate-90 fa-5x"></i></h5>
-                <p class="card-text spacing">Simply drag and drop or select a file to get started</p>
-                <input class="btn btn-primary spacing" type="file" ng2FileSelect (onFileSelected)="onFileDrop($event)"/>
+                <h5 class="card-title "><i class="fas fa-sign-in-alt fa-rotate-90 fa-5x"></i></h5>
+                <p class="card-text ">Simply drag and drop or select a file to get started</p>
+                <input class="btn btn-primary " type="file" ng2FileSelect (onFileSelected)="onFileDrop($event)"/>
               </div>
             </div>
           </ng-template>
           <ng-template #loadMe>
             <div class="card-body">
-              <h5 class="card-title spacing"><i class="fas fa-stopwatch fa-5x fa-disabled"></i></h5>
+              <h5 class="card-title "><i class="fas fa-stopwatch fa-5x fa-disabled"></i></h5>
               <div *ngIf="!(verifying$ | async); then verifyMe; else hashMe"></div>
-              <ng-template #verifyMe><p class="card-text spacing">Verifying...</p></ng-template>
-              <ng-template #hashMe><p class="card-text spacing">Computing hash...</p></ng-template>
-              <button class="btn btn-primary spacing" disabled><i class="fas fa-spinner fa-spin"></i></button>
+              <ng-template #verifyMe><p class="card-text ">Verifying...</p></ng-template>
+              <ng-template #hashMe><p class="card-text ">Computing hash...</p></ng-template>
+              <button class="btn btn-primary " disabled><i class="fas fa-spinner fa-spin"></i></button>
             </div>
           </ng-template>
       </div>
@@ -51,99 +52,92 @@
       'alert-warning':file$.status=='PENDING',
       'alert-danger':file$.status=='NOT_FOUND'}">
       <div class="row">
-            <div class="col-9">
-              <div class="row">
-                <h5 class="col-9">{{file$.name}}</h5>
-                <div class="col-3" [ngSwitch]="file$.status">
-                  <p *ngSwitchCase="NOT_FOUND">{{file$.status}}</p>
-                  <p *ngSwitchCase="TIMESTAMPED">Stamped on: {{file$.stampDate || '5 Feb 2018'}}</p>
-                  <p *ngSwitchCase="PENDING">Committed on: {{file$.commitDate || '5 Feb 2018'}}</p>
-                </div>
-              </div>
-              <small>Computed hash:</small>
-              <small class="break-line">{{file$.hash}}</small>
+        <div class="col-9">
+          <div class="row">
+            <h5 class="col-6 break-line">{{file$.name}}</h5>
+            <div class="col-6 font-italic" [ngSwitch]="file$.status">
+              <small *ngSwitchCase="'NOT_FOUND'">Not timestamped</small>
+              <small *ngSwitchCase="'TIMESTAMPED'">Stamped on: {{file$.timestamp * 1000 | date:'short'}}</small>
+              <small *ngSwitchCase="'PENDING'">Committed on: {{file$.timestamp * 1000 | date:'short'}}</small>
             </div>
-            <div class="col-3 text-center" [ngSwitch]="file$.status">
-              <button type="button" class="btn btn-success" (click)="stampFile(file$)"  *ngSwitchCase="'NOT_FOUND'">
-                <div *ngIf="!(stamping$ | async); then stampMe; else showMe"></div>
-                <ng-template #stampMe>
-                  <div><i class="fas fa-spinner fa-spin fa-2x"></i></div>
-                  <small>Stamping...</small>
-                </ng-template>
-                <ng-template #showMe>
-                  <div><i class="fas fa-stopwatch fa-2x"></i></div>
-                  <small>STAMP NOW</small>
-                </ng-template>
-              </button>
-              <div *ngSwitchCase="'PENDING'">
-                <div><i class="fas fa-clock fa-2x"></i></div>
-                <small>Pending verification...</small>
-              </div>
-              <div *ngSwitchCase="'TIMESTAMPED'">
-                <div><i class="fas fa-check fa-2x"></i></div>
-                <small>Stamped!</small>
-              </div>
-            </div>
-            </div>
+          </div>
+          <small>Computed hash:</small>
+          <small class="break-line">{{file$.hash}}</small>
+        </div>
+        <div class="col-3 text-center" [ngSwitch]="file$.status">
+          <button type="button" class="btn btn-success" (click)="stampFile(file$)"  *ngSwitchCase="'NOT_FOUND'">
+            <div *ngIf="!(stamping$ | async); then stampMe; else showMe"></div>
+            <ng-template #stampMe>
+              <div><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+              <small>Stamping...</small>
+            </ng-template>
+            <ng-template #showMe>
+              <div><i class="fas fa-stopwatch fa-2x"></i></div>
+              <small>STAMP NOW</small>
+            </ng-template>
+          </button>
+          <div *ngSwitchCase="'PENDING'">
+            <div><i class="fas fa-clock fa-2x"></i></div>
+            <small>Pending verification...</small>
+          </div>
+          <div *ngSwitchCase="'TIMESTAMPED'">
+            <div><i class="fas fa-check fa-2x"></i></div>
+            <small>Stamped!</small>
+          </div>
+        </div>
+       </div>
       </div>
     </div>
   </div>
 
-  <div class="spacing row" *ngIf="file$ && file$.status">
+  <div class="spacing row" *ngIf="file$ && file$.otsSummary">
+    <div class="col-8">
+      <h4>Total number of attestations: {{file$.otsSummary.attestationsCount}}</h4>
+    </div>
+    <div class="col-4">
+      <a class="btn btn-block btn-success" *ngIf="file$.status=='TIMESTAMPED'" href="https://ts.pub.blockchaincc.tk/api/v1.1/download/{{file$.hash}}">
+        <i class="fas fa-download"></i>
+        <small>Download manual verification</small>
+      </a>
+    </div>
+  </div>
+
+  <div class="spacing row" *ngIf="file$ && file$.otsSummary">
     <div class="col-12">
-      <h4>Total number of attestations: {{file$.attestations}}</h4>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th style="width:30%"></th>
-            <th style="width:70%"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Calendar URI:</td>
-            <td>opentimestamp.org</td>
-          </tr>
-          <tr>
-            <td>Status:</td>
-            <td>Pending attestation</td>
-          </tr>
-          <tr>
-            <td>Date of timestamp:</td>
-            <td>9:00:00PM 01/01/1990</td>
-          </tr>
-          <tr>
-            <td>Transaction id:</td>
-            <td><a href="https://blockexplorer.com">0x111111</a></td>
-          </tr>
-          <tr>
-            <td>Block:</td>
-            <td><a href="https://blockexplorer.com">50</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="spacing text-center" *ngIf="!file$ || !file$.status">
-    <div class="row ">
-      <div class="col-12">
-        <p>A timestamp proves that some data existed prior to some point in time.
-          MyTimestamp let you create a provable timestamps of a file and
-          independently verifying it at anytime. Timestamps are committed onto the Bitcoin blockchain
-          such that you will always be able to verify our proof with no trusted party.</p>
-      </div>
-    </div>
-    <div class="row ">
-      <div class="col-12">
-        <h5>How it works?</h5>
-        <p>
-          Simply drag and drop or select a file in the drop zone and click on stamp file.
-          Its footprint will be sent to a calendar server which will build the proof eventually committed to the Bitcoin Blockchain.
-          If you already stamped your file then it will be instantly verified on drop and you will be able
-          to download the ots file useful to run an independent verification.
-        </p>
-      </div>
+      <ngb-accordion [closeOthers]="true">
+        <ngb-panel >
+          <ng-template ngbPanelTitle>
+           <span> Click to see attestation details...</span>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            <div  *ngFor="let ats of file$.otsSummary.attestations; let i = index">
+               <div class="card-header alert-light"  >Calendar {{i + 1}}
+                 <span class="badge badge-pill float-right"  [ngClass]="ats.status ? 'badge-success': 'badge-warning'">{{ats.status? 'Stamped':'Pending...'}}</span>
+               </div>
+              <table class="table table-sm">
+                <tbody>
+                  <tr>
+                    <td style="width:30%">Calendar URI:</td>
+                    <td>{{ats.server}}</td>
+                  </tr>
+                  <tr>
+                    <td>Date of timestamp:</td>
+                    <td>N/A</td>
+                  </tr>
+                  <tr>
+                    <td>Transaction ID:</td>
+                    <td ><a>N/A</a></td>
+                  </tr>
+                  <tr>
+                    <td>Block ID:</td>
+                    <td><a href="https://blockchain.info/block-height/{{ats.block}}">{{ats.block}}</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
     </div>
   </div>
 </div>

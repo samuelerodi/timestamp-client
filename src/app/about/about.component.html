@@ -1,11 +1,23 @@
-  <h1>About</h1>
-  <div>
-    For hot module reloading run
-    <pre>npm run start:hmr</pre>
+  <div class="container">
+    <div class="spacing text-center" *ngIf="!file$ || !file$.status">
+      <div class="row ">
+        <div class="col-12">
+          <p>A timestamp proves that some data existed prior to some point in time.
+            MyTimestamp let you create a provable timestamps of a file and
+            independently verifying it at anytime. Timestamps are committed onto the Bitcoin blockchain
+            such that you will always be able to verify our proof with no trusted party.</p>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="col-12">
+          <h5>How it works?</h5>
+          <p>
+            Simply drag and drop or select a file in the drop zone and click on stamp file.
+            Its footprint will be sent to a calendar server which will build the proof eventually committed to the Bitcoin Blockchain.
+            If you already stamped your file then it will be instantly verified on drop and you will be able
+            to download the ots file useful to run an independent verification.
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div>
-    <h3>
-      patrick@tipe.io
-    </h3>
-  </div>
-  <pre>this.localState = {{ localState | json }}</pre>

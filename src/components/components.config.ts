@@ -9,9 +9,6 @@ export const componentsConfig = {
     },
     leftTabs:[
       {name:'Home', target:'/home', active:true},
-      // {name:'About', target:'/about', disabled:true},
-      // {name:'Elements', target:'/elements'},
-      // {name:'Loading', target:'/loading'},
       {name:'Timestamping', target:'/timestamp'},
       {name:'Dropdowns', dropdown:[
         {name:'Dropdown-home', target:'/home'},
