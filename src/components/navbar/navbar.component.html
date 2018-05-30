@@ -1,16 +1,32 @@
-<nav class="navbar navbar-toggleable-lg navbar-light bg-faded" *ngIf="navbar.visible">
+
+<nav class="navbar navbar-toggleable-sm navbar-light navbar-fixed-top bg-faded" *ngIf="navbar.visible">
   <button class="navbar-toggler navbar-toggler-right" type="button" (click)="navbar.collapsed = !navbar.collapsed" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#">Title</a>
+  <a class="navbar-brand" [routerLink]="[navbar.title.target]" *ngIf="navbar.title">
+    <img [src]="'/assets/img/' + navbar.title.logo" *ngIf="navbar.title.logo" style="max-height:32px;">
+    {{navbar.title.name}}
+  </a>
+  <a class="navbar-brand" href="#" >{{navbar.logo}}</a>
   <div class="collapse navbar-collapse" [ngbCollapse]="navbar.collapsed">
-    <ul class="navbar-nav">
+    <ul class="nav navbar-nav mr-auto">
       <li class="nav-item" [ngClass]="{active:item.active}"  *ngFor="let item of navbar.leftTabs">
-        <a class="nav-link" [ngClass]="{disabled:item.disabled}" [routerLink]="[item.target]" *ngIf="item.target && !item.dropdown"><span>{{item.name}}</span></a>
-        <div class="btn btn-block" ngbDropdown *ngIf="item.dropdown && !item.target" [id]="'navbar-dropdown-'+item.name" style="padding:0px">
-          <a class="nav-link" ngbDropdownToggle ><span >{{item.name}}</span></a>
+        <a class="nav-link"  [ngClass]="{disabled:item.disabled}" [routerLink]="[item.target]" *ngIf="item.target && !item.dropdown"><span>{{item.name}}</span></a>
+        <div class="cursor-pointer" ngbDropdown *ngIf="item.dropdown && !item.target" [id]="'navbar-dropdown-'+item.name">
+          <a class="nav-link" ngbDropdownToggle href="" onclick="return false;"><span >{{item.name}}</span></a>
           <div ngbDropdownMenu [attr.aria-labelledby]="'navbar-dropdown-'+item.name" *ngIf="item.dropdown && !item.target">
-            <a class="nav-link dropdown-item" [ngClass]="{disabled:ditem.disabled}" [routerLink]="[item.target]" *ngFor="let ditem of item.dropdown"><span>{{ditem.name}}</span></a>
+            <a class="nav-link dropdown-item" [ngClass]="{disabled:ditem.disabled}" [routerLink]="[ditem.target]" *ngFor="let ditem of item.dropdown"><span>{{ditem.name}}</span></a>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
+      <li class="nav-item" [ngClass]="{active:item.active}"  *ngFor="let item of navbar.rightTabs">
+        <a class="nav-link"  [ngClass]="{disabled:item.disabled}" [routerLink]="[item.target]" *ngIf="item.target && !item.dropdown"><span>{{item.name}}</span></a>
+        <div class="cursor-pointer" ngbDropdown *ngIf="item.dropdown && !item.target" [id]="'navbar-dropdown-'+item.name">
+          <a class="nav-link" ngbDropdownToggle href="#"><span >{{item.name}}</span></a>
+          <div ngbDropdownMenu [attr.aria-labelledby]="'navbar-dropdown-'+item.name" *ngIf="item.dropdown && !item.target">
+            <a class="nav-link dropdown-item" [ngClass]="{disabled:ditem.disabled}" [routerLink]="[ditem.target]" *ngFor="let ditem of item.dropdown"><span>{{ditem.name}}</span></a>
           </div>
         </div>
       </li>

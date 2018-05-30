@@ -98,7 +98,7 @@
     "@angular/router": "^6.0.1",
     "@ng-bootstrap/ng-bootstrap": "^2.0.0",
     "@types/lodash": "^4.14.108",
-    "bootstrap": "^4.1.1",
+    "bootstrap": "^4.0.0-alpha.6",
     "core-js": "^2.5.5",
     "crypto-js": "^3.1.9-1",
     "http-server": "^0.11.1",

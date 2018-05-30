@@ -17,7 +17,6 @@ import { NgDragDropModule } from 'ng-drag-drop';
 
 //STYLES
 import '../styles/styles.scss';
-import '../styles/headings.css';
 
 //CUSTOM SERVICES
 import { AppService, InternalStateType } from '../services/app.service';

@@ -1,4 +1,4 @@
-<footer class="footer" *ngIf="footer.visible" [ngClass]="{'fixed-bottom': footer.fixed}">
+<footer  class="footer" *ngIf="footer.visible" [ngClass]="{'fixed-bottom': footer.fixed}">
   <div class="container">
       <div>Beware</div>
       <small>
@@ -7,3 +7,4 @@
       </small>
   </div>
 </footer>
+<div style="height:8vh;" *ngIf="footer.fixed"></div>
