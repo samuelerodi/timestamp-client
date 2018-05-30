@@ -95,7 +95,7 @@
       <h4>Total number of attestations: {{file$.otsSummary.attestationsCount}}</h4>
     </div>
     <div class="col-4">
-      <a class="btn btn-block btn-success" *ngIf="file$.status=='TIMESTAMPED'" href="https://ts.pub.blockchaincc.tk/api/v1.1/download/{{file$.hash}}">
+      <a class="btn btn-block btn-success" *ngIf="file$.status=='TIMESTAMPED'" href="https://ts.pub.blockchaincc.tk/download/{{file$.hash}}">
         <i class="fas fa-download"></i>
         <small>Download manual verification</small>
       </a>
