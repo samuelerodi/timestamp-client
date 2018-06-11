@@ -5,40 +5,27 @@
 </p>
 
 ___
-THis project has ng-bootstrap library already built in. Check it out @:
-https://ng-bootstrap.github.io/#/home
-
-For nice UI components check out:
-https://github.com/brillout/awesome-angular-components
-
-
-
-[![taylor swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
-[![volkswagen status](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen)
 [![Build Status](https://travis-ci.org/gdi2290/angular-starter.svg?branch=master)](https://travis-ci.org/gdi2290/angular-starter)
 [![GitHub version](https://badge.fury.io/gh/gdi2290%2Fangular-starter.svg)](https://badge.fury.io/gh/gdi2290%2Fangular-starter)
 [![Dependency Status](https://david-dm.org/gdi2290/angular-starter.svg)](https://david-dm.org/gdi2290/angular-starter)
 [![Stack Share](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](http://stackshare.io/gdi2290/angular-starter)
 
 <p align="center">
-  <a href="https://onespeed.io" target="_blank">
-    <img src="https://cloud.githubusercontent.com/assets/1016365/26219144/aa986cfa-3bdb-11e7-9f04-7296dc9ae945.png" alt="Angular Starter" />
+  <a href="#" >
+    <img src="https://opentimestamps.org/assets/images/logos.png" alt="OpenTimestamp" />
   </a>
 </p>
 
-# Angular Webpack Starter [![Join the chat at https://gitter.im/angularclass/angular2-webpack-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/angularclass/angular2-webpack-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Timestamp ng-based browser client
+This repository is built on top of an Angular template and serves as the client-side application of a custodial timestamping engine.
+The engine makes use of the OpenTimestamp Protocol in order to timestamp any kind of file onto the Bitcoin Blockchain, making a permanent proof of the existence of the timestamp file. Check out for further info @ https://opentimestamps.org.
 
+The adopted engine is custodial in the sense that it stores all the relevant proofs together with the ots files for later retrieval and verification on the blockchain. Download of the necessary files is optional so that the user needs to store only the original file for both stamping and proof of existence.
+The client application handles all the file processing and send over to the engine only a hash string of the file loaded. In this way all the data privacy is preserved on the user side. The engine will neither receive nor will be able to reconstruct the original file.
 
-> An Angular starter kit featuring [Angular 5](https://angular.io), [Ahead of Time Compile](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html), [Router](https://angular.io/docs/ts/latest/guide/router.html), [Forms](https://angular.io/docs/ts/latest/guide/forms.html),
-[Http](https://angular.io/docs/ts/latest/guide/server-communication.html),
-[Services](https://gist.github.com/gdi2290/634101fec1671ee12b3e#_follow_@AngularClass_on_twitter),
-[Tests](https://angular.io/docs/ts/latest/guide/testing.html), [E2E](https://angular.github.io/protractor/#/faq#what-s-the-difference-between-karma-and-protractor-when-do-i-use-which-)), [Karma](https://karma-runner.github.io/), [Protractor](https://angular.github.io/protractor/), [Jasmine](https://github.com/jasmine/jasmine), [Istanbul](https://github.com/gotwarlost/istanbul), [TypeScript](http://www.typescriptlang.org/), [@types](https://www.npmjs.com/~types), [TsLint](http://palantir.github.io/tslint/), [Codelyzer](https://github.com/mgechev/codelyzer), [Hot Module Replacement](https://webpack.github.io/docs/hot-module-replacement-with-webpack.html), and [Webpack](http://webpack.github.io/) by [Tipe](https://tipe.io).
+The project is built on top of an Angular Starter kit. Installation instructions and guide to the project follow:
 
-> If you're looking for Angular 1.x please use [NG6-starter](https://github.com/gdi2290/NG6-starter)
-> If you're looking to learn about Webpack and ES6 Build Tools check out [ES6-build-tools](https://github.com/AngularClass/ES6-build-tools)
-> If you're looking to learn TypeScript see [TypeStrong/learn-typescript](https://github.com/TypeStrong/learn-typescript)
-> If you're looking for something easier to get started with then see the angular-seed that I also maintain [gdi2290/angular-seed](https://github.com/gdi2290/angular-seed)
-
+## Angular Starte Kit
 This seed repo serves as an Angular starter for anyone looking to get up and running with Angular and TypeScript fast. Using a [Webpack 3](https://webpack.js.org) for building our files and assisting with boilerplate. We're also using Protractor for our end-to-end story and Karma for our unit tests.
 * Best practices in file and application organization for Angular.
 * Ready to go build system using Webpack for working with TypeScript.
@@ -87,6 +74,7 @@ go to [http://0.0.0.0:3000](http://0.0.0.0:3000) or [http://localhost:3000](http
 * [Configuration](#configuration)
 * [AoT Don'ts](#aot-donts)
 * [External Stylesheets](#external-stylesheets)
+* [Included Libraries](#included-libraries)
 * [Contributing](#contributing)
 * [TypeScript](#typescript)
 * [@Types](#types)
@@ -257,6 +245,16 @@ For example to use Bootstrap as an external stylesheet:
 2) `npm install` the version of Boostrap you want.
 3) In `styles.scss` add `@import '~bootstrap/scss/bootstrap.scss';`
 4) In `src/app/app.module.ts` add underneath the other import statements: `import '../styles/styles.scss';`
+
+# Included Libraries
+This project includes ng-bootstrap library. Check it out @:
+https://ng-bootstrap.github.io/#/home
+
+Font-awesome regular fonts:
+https://fontawesome.com/
+
+For other nice UI components check out:
+https://github.com/brillout/awesome-angular-components
 
 # Contributing
 You can include more examples as components but they must introduce a new concept such as `Home` component (separate folders), and Todo (services). I'll accept pretty much everything so feel free to open a Pull-Request
