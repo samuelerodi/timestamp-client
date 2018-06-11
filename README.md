@@ -18,7 +18,7 @@ ___
 
 # Timestamp ng-based browser client
 This repository is built on top of an Angular template and serves as the client-side application of a custodial timestamping engine.
-The engine makes use of the OpenTimestamp Protocol in order to timestamp any kind of file onto the Bitcoin Blockchain, making a permanent proof of the existence of the timestamp file. Check out for further info @ https://opentimestamps.org.
+The engine makes use of the OpenTimestamp Protocol in order to timestamp any kind of file onto the Bitcoin Blockchain, making a permanent proof of the existence of the timestamp file. Check out for further info @[OpenTimestamp](https://opentimestamps.org).
 
 The adopted engine is custodial in the sense that it stores all the relevant proofs together with the ots files for later retrieval and verification on the blockchain. Download of the necessary files is optional so that the user needs to store only the original file for both stamping and proof of existence.
 The client application handles all the file processing and send over to the engine only a hash string of the file loaded. In this way all the data privacy is preserved on the user side. The engine will neither receive nor will be able to reconstruct the original file.
